@@ -3,6 +3,7 @@
 
 #define ASIGNATURAS 3
 
+// Función para ingresar notas con validación
 void ingresarNotas(float *notas, int estudiantes) {
 
     for (int i = 0; i < estudiantes; i++) {
@@ -28,6 +29,7 @@ void ingresarNotas(float *notas, int estudiantes) {
     }
 }
 
+// Promedio por estudiante
 void promedioEstudiantes(float *notas, int estudiantes) {
 
     for (int i = 0; i < estudiantes; i++) {
@@ -43,6 +45,7 @@ void promedioEstudiantes(float *notas, int estudiantes) {
     }
 }
 
+// Promedio por asignatura
 void promedioAsignaturas(float *notas, int estudiantes) {
 
     for (int j = 0; j < ASIGNATURAS; j++) {
@@ -58,6 +61,7 @@ void promedioAsignaturas(float *notas, int estudiantes) {
     }
 }
 
+// Máximos y mínimos por asignatura
 void maxMinAsignaturas(float *notas, int estudiantes) {
 
     for (int j = 0; j < ASIGNATURAS; j++) {
@@ -81,6 +85,30 @@ void maxMinAsignaturas(float *notas, int estudiantes) {
     }
 }
 
+// Máximos y mínimos por estudiante
+void maxMinEstudiantes(float *notas, int estudiantes) {
+
+    for (int i = 0; i < estudiantes; i++) {
+
+        float max = *(notas + i * ASIGNATURAS + 0);
+        float min = *(notas + i * ASIGNATURAS + 0);
+
+        for (int j = 0; j < ASIGNATURAS; j++) {
+
+            float valor = *(notas + i * ASIGNATURAS + j);
+
+            if (valor > max)
+                max = valor;
+
+            if (valor < min)
+                min = valor;
+        }
+
+        printf("Estudiante %d -> Max: %.2f | Min: %.2f\n",
+               i + 1, max, min);
+    }
+}
+
 int main() {
 
     int estudiantes;
@@ -97,6 +125,8 @@ int main() {
     promedioAsignaturas(notas, estudiantes);
 
     maxMinAsignaturas(notas, estudiantes);
+
+    maxMinEstudiantes(notas, estudiantes);
 
     free(notas);
 
