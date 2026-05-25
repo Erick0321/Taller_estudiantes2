@@ -43,6 +43,21 @@ void promedioEstudiantes(float *notas, int estudiantes) {
     }
 }
 
+void promedioAsignaturas(float *notas, int estudiantes) {
+
+    for (int j = 0; j < ASIGNATURAS; j++) {
+
+        float suma = 0;
+
+        for (int i = 0; i < estudiantes; i++) {
+            suma += *(notas + i * ASIGNATURAS + j);
+        }
+
+        printf("Promedio asignatura %d: %.2f\n",
+               j + 1, suma / estudiantes);
+    }
+}
+
 int main() {
 
     int estudiantes;
@@ -55,6 +70,8 @@ int main() {
     ingresarNotas(notas, estudiantes);
 
     promedioEstudiantes(notas, estudiantes);
+
+    promedioAsignaturas(notas, estudiantes);
 
     free(notas);
 
