@@ -58,6 +58,29 @@ void promedioAsignaturas(float *notas, int estudiantes) {
     }
 }
 
+void maxMinAsignaturas(float *notas, int estudiantes) {
+
+    for (int j = 0; j < ASIGNATURAS; j++) {
+
+        float max = *(notas + j);
+        float min = *(notas + j);
+
+        for (int i = 0; i < estudiantes; i++) {
+
+            float valor = *(notas + i * ASIGNATURAS + j);
+
+            if (valor > max)
+                max = valor;
+
+            if (valor < min)
+                min = valor;
+        }
+
+        printf("Asignatura %d -> Max: %.2f | Min: %.2f\n",
+               j + 1, max, min);
+    }
+}
+
 int main() {
 
     int estudiantes;
@@ -72,6 +95,8 @@ int main() {
     promedioEstudiantes(notas, estudiantes);
 
     promedioAsignaturas(notas, estudiantes);
+
+    maxMinAsignaturas(notas, estudiantes);
 
     free(notas);
 
