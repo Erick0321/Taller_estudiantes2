@@ -3,7 +3,6 @@
 
 #define ASIGNATURAS 3
 
-// Función para ingresar notas con validación
 void ingresarNotas(float *notas, int estudiantes) {
 
     for (int i = 0; i < estudiantes; i++) {
@@ -29,7 +28,6 @@ void ingresarNotas(float *notas, int estudiantes) {
     }
 }
 
-// Promedio por estudiante
 void promedioEstudiantes(float *notas, int estudiantes) {
 
     for (int i = 0; i < estudiantes; i++) {
@@ -45,7 +43,6 @@ void promedioEstudiantes(float *notas, int estudiantes) {
     }
 }
 
-// Promedio por asignatura
 void promedioAsignaturas(float *notas, int estudiantes) {
 
     for (int j = 0; j < ASIGNATURAS; j++) {
@@ -61,7 +58,6 @@ void promedioAsignaturas(float *notas, int estudiantes) {
     }
 }
 
-// Máximos y mínimos por asignatura
 void maxMinAsignaturas(float *notas, int estudiantes) {
 
     for (int j = 0; j < ASIGNATURAS; j++) {
@@ -85,7 +81,6 @@ void maxMinAsignaturas(float *notas, int estudiantes) {
     }
 }
 
-// Máximos y mínimos por estudiante
 void maxMinEstudiantes(float *notas, int estudiantes) {
 
     for (int i = 0; i < estudiantes; i++) {
@@ -109,6 +104,28 @@ void maxMinEstudiantes(float *notas, int estudiantes) {
     }
 }
 
+void aprobadosReprobados(float *notas, int estudiantes) {
+
+    for (int j = 0; j < ASIGNATURAS; j++) {
+
+        int aprobados = 0;
+        int reprobados = 0;
+
+        for (int i = 0; i < estudiantes; i++) {
+
+            float valor = *(notas + i * ASIGNATURAS + j);
+
+            if (valor >= 6)
+                aprobados++;
+            else
+                reprobados++;
+        }
+
+        printf("Asignatura %d -> Aprobados: %d | Reprobados: %d\n",
+               j + 1, aprobados, reprobados);
+    }
+}
+
 int main() {
 
     int estudiantes;
@@ -120,6 +137,8 @@ int main() {
 
     ingresarNotas(notas, estudiantes);
 
+    printf("\n--- RESULTADOS ---\n");
+
     promedioEstudiantes(notas, estudiantes);
 
     promedioAsignaturas(notas, estudiantes);
@@ -127,6 +146,8 @@ int main() {
     maxMinAsignaturas(notas, estudiantes);
 
     maxMinEstudiantes(notas, estudiantes);
+
+    aprobadosReprobados(notas, estudiantes);
 
     free(notas);
 
